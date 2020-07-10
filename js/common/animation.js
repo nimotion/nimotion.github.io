@@ -1,1 +1,279 @@
-!function(t){function i(){this.record=[],this.timeoutMap={},this.listeners={start:[],frame:[],end:[]},this.frames=0,this._init()}i.prototype={_init:function(){return this.index=0,this.nowIndex=0,this.timer=null,this.time=0,this.startTime=null,this.record.forEach(function(e){eachObj(e,function(t,i){~i.indexOf("_")||(e[i].now=e[i].from)})}),this},_getSpendTime:function(){var t=this.time,n=this.nowIndex;return t-this.record.reduce(function(t,i,e){return e<n&&(t+=i._time),t},0)},_request:function(t){var i=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame;return this.timer=i(t),this},_cancel:function(){return(window.cancelAnimationFrame||window.mozCancelAnimationFrame||window.webkitCancelAnimationFrame||window.msCancelAnimationFrame)(this.timer),this},_algorithm:function(t){var i=t.type||"linear",e=t.time||1e3,n=t.now,r=t.aims||0,o=t.spendTime||0;switch(i){case"linear":return function(t){var i=t.time,e=t.now,n=t.aims,r=e+60*(n-e)/(i-t.spendTime);return 0<n-e?n<=r?n:r:r<=n?n:r}({time:e,now:n,aims:r,spendTime:o})}},_emit:function(t,i){return this.listeners[t]&&this.listeners[t].forEach(function(t){t(i)}),this},on:function(t,i){return~getKeys(this.listeners).indexOf(t)&&i&&this.listeners[t].push(i),this},from:function(t){t=t||{};var e=this.record[this.index]||{};return eachObj(t,function(t,i){e[i]={from:t,now:t,to:0}}),this.record[this.index]=e,this},to:function(t){t=t||{};var e=this.record[this.index]||{};return eachObj(t,function(t,i){e[i]=extend(e[i]||{from:0,now:0},{to:t})}),this.record[this.index]=e,this},transition:function(t){var i,e;e="string"==typeof t?t:(i=t.type||"linear",t.time||1e3);var n=this.record[this.index]||{};return extend(n,{_time:e,_type:i}),this.record[this.index]=n,this},next:function(){return this.index=this.record.length,this},timeout:function(t){if(t&&"number"==typeof t){var i=0===this.record.length?-1:this.index;this.timeoutMap[i]=null!=this.timeoutMap[i]?this.timeoutMap[i]+t:t}return this},start:function(){var e=this.record,o=this;return this.next()._emit("start")._request(function t(){var n=e[o.nowIndex],r={};if(!o.startTime&&o.timeoutMap[-1])return o.startTime=(new Date).getTime(),o.pause(),void setTimeout(function(){o._request(t)},o.timeoutMap[-1]);if(o.time===n._time){var i=o.timeoutMap[o.nowIndex];if(o.time=0,o.nowIndex++,i)return o.pause(),void setTimeout(function(){o._request(t)},i);n=e[o.nowIndex]}o.nowIndex!==e.length?(eachObj(n,function(t,i){if(!~i.indexOf("_")){var e=o._algorithm({type:n._type,time:n._time,now:t.now,aims:t.to,spendTime:o.time});r[i]=e,(n[i].now=e)===t.to&&(o.time=n._time)}}),o.time!=n._time&&(o.time+=60),o._emit("frame",r),o.frames++,o._request(t)):o._emit("end").close()})},pause:function(){return this._cancel()},close:function(){return this._cancel()._init()}},t.Amt=i}(window);
+// 动画函数
+(function(win) {
+    // 匀速运动
+    function linear(option) {
+        var
+            time = option.time,
+            now = option.now,
+            aims = option.aims,
+            spendTime = option.spendTime;
+
+        var next = now + (aims - now) * 60 / (time - spendTime);
+
+        return aims - now > 0 
+            ? next >= aims ? aims : next
+            : next <= aims ? aims : next;
+    }
+
+    function Amt() {
+        this.record = [];
+        this.timeoutMap = {};
+        this.listeners = {
+            start: [],
+            frame: [],
+            end: []
+        };
+        this.frames = 0;
+        
+        this._init();
+    }
+
+    Amt.prototype = {
+        _init: function() {
+            this.index = 0;
+            this.nowIndex = 0;
+            this.timer = null;
+            this.time = 0;
+            this.startTime = null;
+            this.record.forEach(function(point) {
+                eachObj(point, function(value, key) {
+                    if (~key.indexOf('_')) return;
+
+                    point[key].now = point[key].from;
+                });
+            });
+
+            return this;
+        },
+        // 获取当前周期已消耗的时间
+        _getSpendTime: function() {
+            var 
+                otherPointSpendTime,
+                time = this.time,
+                nowIndex = this.nowIndex;
+
+            otherPointSpendTime = this.record.reduce(function(p, n, idx) {
+                if (idx < nowIndex) {
+                    p += n['_time'];
+                }
+
+                return p;
+            }, 0);
+
+            return time - otherPointSpendTime;
+        },
+        // 启动逐帧渲染器
+        _request: function(fun) {
+            var requestAnimationFrame = window.requestAnimationFrame 
+                || window.mozRequestAnimationFrame 
+                || window.webkitRequestAnimationFrame 
+                || window.msRequestAnimationFrame;
+
+            this.timer = requestAnimationFrame(fun);
+            return this;
+        },
+        // 关闭逐帧渲染器
+        _cancel: function() {
+            var cancelAnimationFrame = window.cancelAnimationFrame 
+                || window.mozCancelAnimationFrame 
+                || window.webkitCancelAnimationFrame 
+                || window.msCancelAnimationFrame;
+
+            cancelAnimationFrame(this.timer);
+            return this;
+        },
+        // 缓动算法
+        _algorithm: function(option) {
+            var
+                type = option.type || 'linear',
+                time = option.time || 1000,
+                now = option.now,
+                aims = option.aims || 0,
+                spendTime = option.spendTime || 0;
+
+            switch(type) {
+                case 'linear':
+                    return linear({
+                        time: time,
+                        now: now,
+                        aims: aims,
+                        spendTime: spendTime
+                    });
+            }
+        },
+        // 触发事件
+        _emit: function(event, option) {
+            this.listeners[event] && this.listeners[event].forEach(function(handler) {
+                handler(option);
+            });
+
+            return this;
+        },
+        // 事件
+        on: function(event, handler) {
+            if (~getKeys(this.listeners).indexOf(event) && handler) {
+                this.listeners[event].push(handler);
+            }
+
+            return this;
+        },
+        // 起始点
+        from: function(option) {
+            option = option || {};
+            var point = this.record[this.index] || {};
+
+            eachObj(option, function(value, key) {
+                point[key] = {
+                    from: value,
+                    now: value,
+                    to: 0
+                };
+            });
+
+            this.record[this.index] = point;
+
+            return this;
+        },
+        // 目标点
+        to: function(option) {
+            option = option || {};
+            var point = this.record[this.index] || {};
+
+            eachObj(option, function(value, key) {
+                point[key] = extend(point[key] || {
+                    from: 0,
+                    now: 0
+                }, {
+                    to: value
+                });
+            });
+
+            this.record[this.index] = point;
+
+            return this;
+        },
+        // 变换规律
+        transition: function(option) {
+            var 
+                type,
+                time;
+
+            if (typeof option === 'string') {
+                time = option;
+            } else {
+                type = option.type || 'linear';
+                time = option.time || 1000;
+            }
+
+            var point = this.record[this.index] || {};
+
+            extend(point, {
+                '_time': time,
+                '_type': type
+            });
+
+            this.record[this.index] = point;
+
+            return this;
+        },
+        // 进入下一个变换周期
+        next: function() {
+            this.index = this.record.length;
+            return this;
+        },
+        // 等待
+        timeout: function(time) {
+            if (time && typeof time === 'number') {
+                var index = this.record.length === 0 ? -1 : this.index;
+                this.timeoutMap[index] = this.timeoutMap[index] != null
+                    ? this.timeoutMap[index] + time
+                    : time;
+            }
+
+            return this;
+        },
+        // 启动动画
+        start: function() {
+            var 
+                record = this.record,
+                self = this;
+
+            return this
+                .next()
+                ._emit('start')
+                ._request(function render() {
+                    var 
+                        point = record[self.nowIndex],
+                        result = {};
+
+                    if (!self.startTime && self.timeoutMap['-1']) {
+                        self.startTime = (new Date()).getTime();
+                        self.pause();
+                        setTimeout(function() {
+                            self._request(render);
+                        }, self.timeoutMap['-1']);
+
+                        return;
+                    }
+
+                    if (self.time === point['_time']) {
+                        var timeout = self.timeoutMap[self.nowIndex];
+                        
+                        self.time = 0;
+                        self.nowIndex++;
+                        if (timeout) {
+                            self.pause();
+                            setTimeout(function() {
+                                self._request(render)
+                            }, timeout);
+                            return;
+                        }
+                        
+                        point = record[self.nowIndex];
+                    }
+
+                    if (self.nowIndex === record.length) {
+                        self._emit('end').close();
+                        return;
+                    }
+
+                    eachObj(point, function(item, key) {
+                        if (~key.indexOf('_')) return;
+
+                        var nextValue = self._algorithm({
+                            type: point['_type'],
+                            time: point['_time'],
+                            now: item['now'],
+                            aims: item['to'],
+                            spendTime: self.time
+                        });
+
+                        result[key] = nextValue;
+                        point[key].now = nextValue;
+
+                        if (nextValue === item['to']) {
+                            self.time = point['_time'];
+                        }
+                    });
+
+                    if (self.time != point['_time']) {
+                        self.time += 60;
+                    }
+
+                    self._emit('frame', result);
+                    self.frames++;
+                    self._request(render);
+                });
+        },
+        // 暂停
+        pause: function() {
+            return this._cancel();
+        },
+        // 关闭动画
+        close: function() {
+            return this._cancel()._init();
+        }
+    }
+
+    win.Amt = Amt;
+})(window);

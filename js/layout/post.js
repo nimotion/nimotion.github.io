@@ -1,1 +1,59 @@
-window.addEventListener("load",function(){window._skappPostAnimation=function(){document.querySelectorAll("article.page__mini-article").forEach(function(n){if(!n.parentElement.parentElement.classList.contains("js-hidden")){var t=getPosition(n),i=new Pack(n);i.base("js-ease-out-leave-active").base("js-ease-out-leave").transfrom("js-ease-out-enter-active").end(function(){["js-ease-out-enter","js-ease-out-enter-active","js-ease-out-leave","js-ease-out-leave-active"].forEach(function(e){n.classList.remove(e)})}),function(e){var n=null,t=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,i=window.cancelAnimationFrame||window.mozCancelAnimationFrame;function o(){i(n),n=t(e.bind(null,function(){document.removeEventListener("scroll",o)}))}document.addEventListener("scroll",o),o()}(function(e){t.y-window.scrollY-document.documentElement.clientHeight<50&&(e(),i.toggle())})}})},window._skappPostAnimation()});
+window.addEventListener('load', function() {
+    function addListener(callback) {
+        var 
+            timer = null,
+            requestAnimationFrame = window.requestAnimationFrame 
+                || window.mozRequestAnimationFrame
+                || window.webkitRequestAnimationFrame
+                || window.msRequestAnimationFrame,
+            cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
+        function lintener() {
+            cancelAnimationFrame(timer);
+
+            timer = requestAnimationFrame(callback.bind(null, function() {
+                document.removeEventListener('scroll', lintener);
+            }));
+        }
+
+        document.addEventListener('scroll', lintener);
+
+        lintener();
+    }
+
+    window._skappPostAnimation = function() {
+        var posts = document.querySelectorAll('article.page__mini-article');
+        
+        posts.forEach(function(post) {
+            if (post.parentElement.parentElement.classList.contains('js-hidden')) return;
+
+            var position = getPosition(post);
+
+            var pack = new Pack(post);
+
+            pack
+                .base('js-ease-out-leave-active')
+                .base('js-ease-out-leave')
+                .transfrom('js-ease-out-enter-active')
+                .end(function() {
+                    var arr = ['js-ease-out-enter', 'js-ease-out-enter-active', 'js-ease-out-leave', 'js-ease-out-leave-active'];
+
+                    arr.forEach(function(item) {
+                        post.classList.remove(item);
+                    });
+                })
+
+            addListener(function(remove) {
+                var diff = position.y - window.scrollY - document.documentElement.clientHeight;
+
+                if (diff < 50) {
+                    remove();
+
+                    pack.toggle();
+                }
+            });
+        });
+    }
+
+    window._skappPostAnimation();
+});
