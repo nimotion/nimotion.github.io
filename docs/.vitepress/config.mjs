@@ -86,7 +86,7 @@ export default defineConfig({
   // 重定向路由
   rewrites: {
     'KnowledgeBase/MotorBasics/IntegratedMotors.md': 'IntegratedMotors/index.md',
-    'KnowledgeBase/MotorBasics/IntegratedMotorAdvantages.md': 'AdvantagesAndDisadvantages/index.md',
+    'KnowledgeBase/MotorBasics/IntegratedMotorAdvantages.md': 'IntegratedMotorAdvantages/index.md',
     'KnowledgeBase/MotorBasics/IntegratedMotorsTypes.md': 'IntegratedMotorsTypes/index.md',
     'KnowledgeBase/MotorBasics/IntegratedMotorRelationship.md': 'IntegratedMotorRelationship/index.md',
 

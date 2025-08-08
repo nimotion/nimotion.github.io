@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # What is an integrated motor?
 
 Integrated drive control motors, with their high level of integration, compatibility, convenience, and excellent performance, have become a shining star in modern industrial automation. They are undoubtedly an ideal choice for users seeking efficient, precise, and intelligent control.
@@ -19,11 +23,8 @@ According to the International Electrotechnical Commission ([IEC](https://en.wik
 - **Modular design:** The motor body shares a common housing with the inverter, encoder and other components, reducing external wiring
 - **Intelligent control:** built-in PLC or IoT interface, supporting real-time parameter adjustment(IEEE 2025 Smart Motor Technology White Paper)
 
-
 ## Common combination types of integrated motors
-According to the above, we know that the integrated motor includes components such as motor, encoder, and driver. Therefore, according to the different structures of the integrated motor, different classification names are generated, such as integrated stepper motor, integrated servo motor and other combination types.
-
-
+According to the above, we know that the integrated motor includes components such as motor, encoder, and driver. Therefore, according to the different structures of the integrated motor, different classification names are generated, such as [integrated stepper motor](https://www.nimotion.com/product/list/18), integrated servo motor and other combination types.
 
 ### Integrated stepper motor
 ![Integrated stepper motor](https://www.nimotion.com/profile/upload/2025/07/14/20_20250714103216A393.png)
@@ -35,7 +36,7 @@ Generally, they support pulse or bus communication (such as CAN/Modbus/EtherCAT)
 
 ### Integrated servo motor
 ![Integrated servo motor](https://www.nimotion.com/profile/upload/2025/07/14/PMM20_20250714104946A395.png)
-Integrated servo motors and integrated stepper motors are nearly identical, both consisting of a motor, drive, and encoder. The main difference is that integrated servo motors are based on permanent magnet synchronous motors, drives, and encoders. 
+[Integrated servo motors](https://www.nimotion.com/product/list/20) and integrated stepper motors are nearly identical, both consisting of a motor, drive, and encoder. The main difference is that integrated servo motors are based on permanent magnet synchronous motors, drives, and encoders. 
 
 Furthermore, the performance specifications of the drive and encoder are higher than those of integrated stepper motors. Therefore, integrated servo motors offer higher performance than integrated stepper motors, but also come at a higher cost. Integrated servo motors sometimes also include additional components, such as brakes, IP65 protective housings, and STO protection circuits.
 
