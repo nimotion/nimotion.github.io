@@ -53,7 +53,7 @@ Similarly, the structure of the integrated brushless motor is similar to that of
 However, its performance is higher than that of the integrated stepper motor, so it is often used to replace the integrated servo motor because of its lower cost and high performance.
 
 <!-- 详细分类 -->
-[Detailed classification of integrated motors](IntegratedMotorsTypes/index.md)
+<!-- [Detailed classification of integrated motors](IntegratedMotorsTypes/index.md) -->
 
 
 <!-- ## 一体化电机的常见尺寸 -->
