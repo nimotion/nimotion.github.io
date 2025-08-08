@@ -8,11 +8,11 @@ hero:
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Knowledge Base
+      link: IntegratedMotors/index.md
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Products
+      link: https://www.nimotion.com/product
 
 features:
   - title: Feature A

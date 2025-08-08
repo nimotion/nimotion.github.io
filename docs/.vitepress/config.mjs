@@ -15,10 +15,10 @@ export default defineConfig({
     // 顶部导航栏
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Products', link: '/markdown-examples' },
-      { text: 'Knowledge Base', link: '/markdown-examples' },
-      { text: 'Case Studies', link: '/markdown-examples' },
-      { text: 'Contact', link: '/markdown-examples' }
+      { text: 'Products', link: 'https://www.nimotion.com/product' },
+      { text: 'Knowledge Base', link: 'IntegratedMotors/index.md' },
+      { text: 'Case Studies', link: 'https://www.nimotion.com/solution' },
+      { text: 'Contact', link: 'https://www.nimotion.com/contact' }
 
     ],
   // 左侧导航栏

@@ -26,7 +26,7 @@ According to the above, we know that the integrated motor includes components su
 
 
 ### Integrated stepper motor
-[Integrated stepper motor](https://www.nimotion.com/profile/upload/2025/07/14/20_20250714103216A393.png)
+![Integrated stepper motor](https://www.nimotion.com/profile/upload/2025/07/14/20_20250714103216A393.png)
 
 The integrated stepper motor is an intelligent drive unit that integrates the stepper motor, drive circuit and encoder into one, with open-loop or closed-loop control mode.
 
@@ -34,7 +34,7 @@ Generally, they support pulse or bus communication (such as CAN/Modbus/EtherCAT)
 
 
 ### Integrated servo motor
-[Integrated servo motor](https://www.nimotion.com/profile/upload/2025/07/14/PMM20_20250714104946A395.png)
+![Integrated servo motor](https://www.nimotion.com/profile/upload/2025/07/14/PMM20_20250714104946A395.png)
 Integrated servo motors and integrated stepper motors are nearly identical, both consisting of a motor, drive, and encoder. The main difference is that integrated servo motors are based on permanent magnet synchronous motors, drives, and encoders. 
 
 Furthermore, the performance specifications of the drive and encoder are higher than those of integrated stepper motors. Therefore, integrated servo motors offer higher performance than integrated stepper motors, but also come at a higher cost. Integrated servo motors sometimes also include additional components, such as brakes, IP65 protective housings, and STO protection circuits.
@@ -46,7 +46,7 @@ The integrated servo motor is a high-precision motion control unit that integrat
 
 
 ### Integrated brushless motor
-[Integrated brushless motor](https://www.nimotion.com/profile/upload/2025/07/14/%E6%AD%A5%E8%BF%9B%E4%BC%BA%E6%9C%8D%E9%98%B2%E6%B0%B442S-B-%E6%81%A2%E5%A4%8D%E7%9A%84_20250714113027A409.png)
+![Integrated brushless motor](https://www.nimotion.com/profile/upload/2025/07/14/%E6%AD%A5%E8%BF%9B%E4%BC%BA%E6%9C%8D%E9%98%B2%E6%B0%B442S-B-%E6%81%A2%E5%A4%8D%E7%9A%84_20250714113027A409.png)
 Similarly, the structure of the integrated brushless motor is similar to that of the integrated servo motor. The main difference is that the motor body is an excitation brushless motor. Although the function is the same as the integrated servo motor, the overall performance is worse. 
 
 However, its performance is higher than that of the integrated stepper motor, so it is often used to replace the integrated servo motor because of its lower cost and high performance.
