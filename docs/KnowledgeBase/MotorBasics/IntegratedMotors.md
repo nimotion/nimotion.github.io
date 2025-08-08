@@ -1,89 +1,18 @@
 # What is an integrated motor?
 
-This page demonstrates some of the built-in markdown extensions provided by VitePress.
+Integrated drive control motors, with their high level of integration, compatibility, convenience, and excellent performance, have become a shining star in modern industrial automation. They are undoubtedly an ideal choice for users seeking efficient, precise, and intelligent control.
 
-## Syntax Highlighting
+## The core definition of integrated motor
 
-VitePress provides Syntax Highlighting powered by [Shiki](https://github.com/shikijs/shiki), with additional features like line-highlighting:
+As the name suggests, an integrated motor is a servo system that integrates components such as a motor, encoder, and driver. It can support buses such as EtherCAT, CANopen, and Modbus.
 
-**Input**
+Simply put, it's like the difference between a desktop computer and a laptop.
 
-````md
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
-```
-````
+Therefore, their compact size easily evokes the need for complex configurations like a driver, encoder, and brake (some products have built-in brakes). They are particularly suitable for space-sensitive and distributed control applications.
 
-**Output**
+According to the International Electrotechnical Commission ([IEC](https://en.wikipedia.org/wiki/International_Electrotechnical_Commission)) standards, its typical characteristics include:
 
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
-```
+- **Modular design:** The motor body shares a common housing with the inverter, encoder and other components, reducing external wiring
+- **Intelligent control:** built-in PLC or IoT interface, supporting real-time parameter adjustment(IEEE 2025 Smart Motor Technology White Paper)
 
-## Custom Containers
 
-**Input**
-
-```md
-::: info
-This is an info box.
-:::
-
-::: tip
-This is a tip.
-:::
-
-::: warning
-This is a warning.
-:::
-
-::: danger
-This is a dangerous warning.
-:::
-
-::: details
-This is a details block.
-:::
-```
-
-**Output**
-
-::: info
-This is an info box.
-:::
-
-::: tip
-This is a tip.
-:::
-
-::: warning
-This is a warning.
-:::
-
-::: danger
-This is a dangerous warning.
-:::
-
-::: details
-This is a details block.
-:::
-
-## More
-
-Check out the documentation for the [full list of markdown extensions](https://vitepress.dev/guide/markdown).
-
-## Custom Containers
-
-test
